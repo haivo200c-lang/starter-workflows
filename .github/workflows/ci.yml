@@ -1,0 +1,26 @@
+
+name: CI for OSS project
+
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Check repository
+        run: |
+          echo "Checking starter-workflows repository..."
+          test -d ci
+          test -f README.md
+
+      - name: Run test
+        run: |
+          echo "Running CI test..."
+          grep -q "GitHub Actions" README.md
+          echo "TEST PASSED"
